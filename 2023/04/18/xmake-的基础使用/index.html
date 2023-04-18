@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.nzself.top","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="xmake 的一些基础操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xmake 的基础使用">
+<meta property="og:url" content="http://blog.nzself.top/2023/04/18/xmake-%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="xmake 的一些基础操作">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://doc.shiyanlou.com/courses/2764/27526/6795acf26e4f15326f1d9970f80db3bd-1">
+<meta property="og:image" content="https://doc.shiyanlou.com/courses/2764/27526/308009fc6eea85743abe41e97cc60d73-0">
+<meta property="og:image" content="https://toodles.oss-cn-hangzhou.aliyuncs.com/img/image-20230417130704848.png">
+<meta property="og:image" content="https://toodles.oss-cn-hangzhou.aliyuncs.com/img/image-20230417233751473.png">
+<meta property="og:image" content="https://doc.shiyanlou.com/courses/2764/27526/1c4b3662abde868d0f949f6b9ef5c88b-1">
+<meta property="og:image" content="https://doc.shiyanlou.com/courses/2764/27526/ca435d943a281fae38078d6065bc2dd6-0">
+<meta property="og:image" content="https://doc.shiyanlou.com/courses/2764/27526/0371ee1ae8a578b86f608a0591bb9a43-0">
+<meta property="og:image" content="https://doc.shiyanlou.com/courses/2764/27526/90300f801111f390a97b279abe82afb4-0">
+<meta property="og:image" content="https://doc.shiyanlou.com/courses/2764/27526/bfe9439264336bfe456c57080718a6de-0">
+<meta property="article:published_time" content="2023-04-18T08:33:56.000Z">
+<meta property="article:modified_time" content="2023-04-18T08:35:22.759Z">
+<meta property="article:author" content="ToodlesFate">
+<meta property="article:tag" content="xmake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://doc.shiyanlou.com/courses/2764/27526/6795acf26e4f15326f1d9970f80db3bd-1">
+
+
+<link rel="canonical" href="http://blog.nzself.top/2023/04/18/xmake-%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://blog.nzself.top/2023/04/18/xmake-%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/","path":"2023/04/18/xmake-的基础使用/","title":"xmake 的基础使用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>xmake 的基础使用 | 我的博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">我的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xmake-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-text">xmake 的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#xmake-%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-text">xmake 的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA-C-%E7%A9%BA%E5%B7%A5%E7%A8%8B"><span class="nav-text">创建 C++ 空工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F"><span class="nav-text">安装程序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xmake-%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8"><span class="nav-text">xmake 的基本命令使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D"><span class="nav-text">基本命令介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config-%E5%AD%90%E5%91%BD%E4%BB%A4"><span class="nav-text">config 子命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#show-%E5%AD%90%E5%91%BD%E4%BB%A4"><span class="nav-text">show 子命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#update-%E5%AD%90%E5%91%BD%E4%BB%A4"><span class="nav-text">update 子命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-x2F-C-%E9%80%9A%E7%94%A8%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="nav-text">C&#x2F;C++ 通用项目配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E5%9F%BA%E7%A1%80%E7%AE%80%E4%BB%8B"><span class="nav-text">编译链接基础简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xmake-lua-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="nav-text">xmake.lua 基础配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-C-x2F-C-%E7%BC%96%E8%AF%91%E9%80%89%E9%A1%B9"><span class="nav-text">添加 C&#x2F;C++ 编译选项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-x2F-C-%E4%BE%9D%E8%B5%96%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">C&#x2F;C++ 依赖包的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%BA%93%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-text">依赖库的介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E5%BA%93%E7%9A%84%E4%B8%8B%E8%BD%BD"><span class="nav-text">远程库的下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conan-%E4%BB%93%E5%BA%93%E4%BE%9D%E8%B5%96%E5%8C%85%E7%9A%84%E9%9B%86%E6%88%90-%E9%9C%80%E8%A6%81%E9%85%8D%E7%BD%AE"><span class="nav-text">Conan 仓库依赖包的集成(需要配置)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95"><span class="nav-text">配置语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95%E7%AE%80%E4%BB%8B"><span class="nav-text">配置语法简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0%E5%9F%9F%E9%85%8D%E7%BD%AE"><span class="nav-text">描述域配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E5%9F%9F%E9%85%8D%E7%BD%AE"><span class="nav-text">脚本域配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%9B%AE%E6%A0%87%E7%A8%8B%E5%BA%8F%E9%85%8D%E7%BD%AE"><span class="nav-text">多目标程序配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E4%BE%9D%E8%B5%96"><span class="nav-text">目标依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%9B%AE%E6%A0%87%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%BE%9D%E8%B5%96%E7%BC%96%E8%AF%91"><span class="nav-text">多目标程序的依赖编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%BA%93%E7%9A%84%E4%BE%9D%E8%B5%96%E7%BC%96%E8%AF%91"><span class="nav-text">动态库的依赖编译</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="nav-text">条件判断</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="nav-text">内置变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-text">内置变量的介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E9%85%8D%E7%BD%AE%E9%80%89%E9%A1%B9"><span class="nav-text">读取配置选项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-x2F-C-%E5%AD%90%E5%B7%A5%E7%A8%8B%E5%92%8C%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-text">C &#x2F; C++ 子工程和目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-includes-%E5%BC%95%E5%85%A5%E7%9B%AE%E6%A0%87%E5%92%8C%E6%96%87%E4%BB%B6"><span class="nav-text">使用 includes 引入目标和文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E5%AE%9E%E7%8E%B0%E6%89%B9%E9%87%8F-includes"><span class="nav-text">模式匹配实现批量 includes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B9-xmake-lua-%E9%85%8D%E7%BD%AE"><span class="nav-text">根 xmake.lua 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90-xmake-lua-%E9%85%8D%E7%BD%AE"><span class="nav-text">子 xmake.lua 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8-xmake-lua-%E9%97%B4%E7%9B%AE%E6%A0%87%E4%BE%9D%E8%B5%96"><span class="nav-text">跨 xmake.lua 间目标依赖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-x2F-C-%E9%A2%84%E7%BC%96%E8%AF%91%E5%A4%B4%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="nav-text">C &#x2F; C++ 预编译头文件配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E7%BC%96%E8%AF%91%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-text">预编译头文件介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%BC%96%E8%AF%91%E5%99%A8%E5%AF%B9%E9%A2%84%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%A4%84%E7%90%86"><span class="nav-text">不同编译器对预编译器的处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-x2F-C-%E5%BA%93%E6%8E%A5%E5%8F%A3%E5%92%8C%E7%BC%96%E8%AF%91%E5%99%A8%E7%89%B9%E6%80%A7%E6%A3%80%E6%B5%8B"><span class="nav-text">C &#x2F; C++ 库接口和编译器特性检测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%B9%B3%E5%8F%B0%E4%BB%8B%E7%BB%8D"><span class="nav-text">跨平台介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%BC%96%E8%AF%91%E5%99%A8%E7%89%B9%E6%80%A7%E6%A3%80%E6%B5%8B"><span class="nav-text">配置编译器特性检测</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ToodlesFate"
+      src="https://toodles.oss-cn-hangzhou.aliyuncs.com/img/7124b9134799adab7a237abd6aaefed.jpg">
+  <p class="site-author-name" itemprop="name">ToodlesFate</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ToodlesFate" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ToodlesFate" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.nzself.top/2023/04/18/xmake-%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://toodles.oss-cn-hangzhou.aliyuncs.com/img/7124b9134799adab7a237abd6aaefed.jpg">
+      <meta itemprop="name" content="ToodlesFate">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="xmake 的基础使用 | 我的博客">
+      <meta itemprop="description" content="xmake 的一些基础操作">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          xmake 的基础使用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-18 16:33:56 / 修改时间：16:35:22" itemprop="dateCreated datePublished" datetime="2023-04-18T16:33:56+08:00">2023-04-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Xmake/" itemprop="url" rel="index"><span itemprop="name">Xmake</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>23k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>21 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">xmake 的一些基础操作</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="xmake-的基本使用"><a href="#xmake-的基本使用" class="headerlink" title="xmake 的基本使用"></a>xmake 的基本使用</h1><h2 id="xmake-的安装"><a href="#xmake-的安装" class="headerlink" title="xmake 的安装"></a>xmake 的安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://xmake.io/shget.text -O - | bash <span class="comment"># 安装</span></span><br><span class="line"><span class="built_in">source</span> ~/.xmake/profile                      <span class="comment"># 加载</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake --version <span class="comment"># 检查是否安装成功</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建-C-空工程"><a href="#创建-C-空工程" class="headerlink" title="创建 C++ 空工程"></a>创建 C++ 空工程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake create hello</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake  <span class="comment"># 编译 </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake run <span class="comment"># 运行程序</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f -m debug <span class="comment"># 切换为debug 模式, 保存配置, 执行xmake 即可生成带符号信息的 debug 程序</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake <span class="comment"># 编译生成 debug 版本(需要有gdb最新版本)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="安装程序"><a href="#安装程序" class="headerlink" title="安装程序"></a>安装程序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake install -y <span class="comment"># 将我们写的程序安装在系统中 (/usr/local)</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello <span class="comment"># 检验程序是否成功安装</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> hello <span class="comment"># 检验程序安装在哪个路径</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmkae uninstall -y <span class="comment"># 卸载程序 </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> hello  <span class="comment"># 如果没有结果, 表明卸载成功</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="xmake-的基本命令使用"><a href="#xmake-的基本命令使用" class="headerlink" title="xmake 的基本命令使用"></a>xmake 的基本命令使用</h1><h2 id="基本命令介绍"><a href="#基本命令介绍" class="headerlink" title="基本命令介绍"></a>基本命令介绍</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmake --<span class="built_in">help</span> <span class="comment"># 查看帮助手册 </span></span><br><span class="line">xmake build --<span class="built_in">help</span> <span class="comment"># 查看 build 子命令帮助手册	</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake [task] [options] [target] <span class="comment"># [] 部分表示可选输入</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>task</code> 子命令任务名</li>
+<li><code>options</code> 参数选项</li>
+<li><code>target</code> 当前的命令针对哪个程序</li>
+</ul>
+<p><strong>Action 区域命令介绍</strong> </p>
+<ul>
+<li><code>config</code>：配置编译需要的参数，比如平台、架构等。</li>
+<li><code>global</code>：全局配置编译参数。</li>
+<li><code>build</code>：构建程序。</li>
+<li><code>run</code>：运行目标程序。</li>
+<li><code>install</code>：安装编译后的目标程序。</li>
+<li><code>uninstall</code>：卸载之前安装的程序文件。</li>
+<li><code>package</code>：打包编译生成的库和头文件。</li>
+<li><code>clean</code>：清理编译过程中生成的临时文件。</li>
+<li><code>require</code>：手动拉取第三方依赖库。</li>
+<li><code>update</code>：xmake 程序自更新。</li>
+</ul>
+<p>**xmake build 的一些选项 ** </p>
+<ul>
+<li><code>-v/--verbose</code>：查看详细完整的编译命令。 </li>
+<li><code>-r/--rebuild</code>：强制重新编译所有代码。</li>
+<li><code>-j/--jobs</code>：指定多任务编译的并行任务数。</li>
+<li><code>-w/--warning</code>：编译过程中显示编译警告信息。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake -rv <span class="comment"># 重新编译并且显示详细命令输出</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="config-子命令"><a href="#config-子命令" class="headerlink" title="config 子命令"></a>config 子命令</h2><p><code>config</code> 子命令主要用于在编译前，对项目进行一些参数配置，比如切换平台、架构以及编译模式等，可用于修改编译过程中的各种行为.</p>
+<p>当然里面很多配置是可以直接在 <code>xmake.lua</code> 中配置来永久生效的，不过这里通过配置命令，也可以针对当前编译临时生效，配置结果也会被缓存。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f -m debug <span class="comment"># 切换到调试模式 </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f -o /tmp/build <span class="comment"># 切换编译输出目录 </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake -v <span class="comment"># 查看配置信息</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f --cxflags=<span class="string">&quot;-DTEST&quot;</span> <span class="comment"># 同时添加 C/C++ 编译选项。</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmake f --ldflags=<span class="string">&quot;-L/tmp -lpthread&quot;</span> <span class="comment"># 添加链接库和搜搜路径</span></span><br><span class="line">xmake f --links=<span class="string">&quot;pthread&quot;</span> --linkdirs=<span class="string">&quot;/tmp&quot;</span> <span class="comment"># 可以达到和上面一样的结果</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f --toolchain=clang <span class="comment"># 切换到 clang 编译工具链</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f -c  <span class="comment"># 恢复默认配置</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="show-子命令"><a href="#show-子命令" class="headerlink" title="show 子命令"></a>show 子命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake show <span class="comment"># 可以用来展示当前工程的基本信息</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake show -t hello <span class="comment"># 查看下在 xmake.lua 文件中定义的 target(&quot;hello&quot;) 目标程序的基本信息</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="update-子命令"><a href="#update-子命令" class="headerlink" title="update 子命令"></a>update 子命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake update -f <span class="comment"># 自更新命令快速更新版本</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="C-x2F-C-通用项目配置"><a href="#C-x2F-C-通用项目配置" class="headerlink" title="C&#x2F;C++ 通用项目配置"></a>C&#x2F;C++ 通用项目配置</h1><h2 id="编译链接基础简介"><a href="#编译链接基础简介" class="headerlink" title="编译链接基础简介"></a>编译链接基础简介</h2><p> C&#x2F;C++ 程序的大致构建流程：预处理、编译和链接。</p>
+<ul>
+<li>预处理：使用预编译器去处理 C&#x2F;C++ 源文件中头文件、宏定义等。</li>
+<li>编译：使用编译器对处理后的 C&#x2F;C++ 源文件进行源码编译生成 <code>.o</code> 对象文件。</li>
+<li>链接：使用链接器将编译生成的 <code>.o</code> 对象文件进行完整链接生成最终的可执行文件。</li>
+</ul>
+<p><img src="https://doc.shiyanlou.com/courses/2764/27526/6795acf26e4f15326f1d9970f80db3bd-1" alt="c/cpp"> </p>
+<p>链接器会链接所有的 <code>.o</code> 对象外，还会链接 <code>.a</code> 静态库，<code>.so</code> 动态库 。</p>
+<h2 id="xmake-lua-基础配置"><a href="#xmake-lua-基础配置" class="headerlink" title="xmake.lua 基础配置"></a>xmake.lua 基础配置</h2><p><strong>配置目标的类型</strong></p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>phony</td>
+<td>空目标程序</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>二进制程序</td>
+</tr>
+<tr>
+<td>static</td>
+<td>静态库程序</td>
+</tr>
+<tr>
+<td>shared</td>
+<td>动态库程序</td>
+</tr>
+</tbody></table>
+<p><strong>可执行程序类型</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>静态库程序的类型</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake create -t static hello_static <span class="comment"># 当前工程类型为静态库 </span></span><br></pre></td></tr></table></figure>
+
+<p>其中，目录下的 <code>foo.cpp</code> 用来参与静态库编译，<code>main.cpp</code> 用来生成可执行程序</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake  <span class="comment"># 编译 </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake run <span class="comment"># 运行</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>动态库程序类型</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake create -t static hello_stati</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>Phony</code> 目标类型</strong> </p>
+<p>通常用于组合其它目标程序的依赖关系，实现关联编译。</p>
+<h2 id="添加-C-x2F-C-编译选项"><a href="#添加-C-x2F-C-编译选项" class="headerlink" title="添加 C&#x2F;C++ 编译选项"></a>添加 C&#x2F;C++ 编译选项</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    add_cxflags(<span class="string">&quot;-DTEST1&quot;</span>)</span><br><span class="line"><span class="comment"># add_cxflags(&quot;-DTEST1&quot;)  为所有的 C/C++ 代码定义上 TEST1 宏开关 </span></span><br></pre></td></tr></table></figure>
+
+<p><strong>添加宏定义</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    add_cxflags(<span class="string">&quot;-DTEST1&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;TEST2&quot;</span>)</span><br><span class="line"><span class="comment"># 添加新的宏定义开关 TEST2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>头文件路径和链接库配置</strong> </p>
+<p><code>xmake</code> 也提供了方便的配置接口去配置头文件搜索路径、链接库、库搜索路径，分别是如下几个接口。</p>
+<ul>
+<li><code>add_includedirs</code>：添加头文件搜索目录。</li>
+<li><code>add_linkdirs</code>：添加库搜索目录。</li>
+<li><code>add_links</code>：添加链接库。</li>
+<li><code>add_syslinks</code>：添加系统链接库。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    add_cxflags(<span class="string">&quot;-DTEST1&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;TEST2&quot;</span>)</span><br><span class="line">    add_links(<span class="string">&quot;z&quot;</span>)</span><br><span class="line">    add_syslinks(<span class="string">&quot;pthread&quot;</span>)</span><br><span class="line">    add_linkdirs(<span class="string">&quot;/tmp&quot;</span>)</span><br><span class="line">    add_includedirs(<span class="string">&quot;/tmp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置语言标准</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置 c 代码标准：c99， c++ 代码标准：c++11</span></span><br><span class="line">set_languages(<span class="string">&quot;c99&quot;</span>, <span class="string">&quot;c++11&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置编译优化</strong> </p>
+<p>一般默认就有优化，不需要手动添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    add_cxflags(<span class="string">&quot;-DTEST1&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;TEST2&quot;</span>)</span><br><span class="line">    add_links(<span class="string">&quot;z&quot;</span>)</span><br><span class="line">    add_syslinks(<span class="string">&quot;pthread&quot;</span>)</span><br><span class="line">    add_linkdirs(<span class="string">&quot;/tmp&quot;</span>)</span><br><span class="line">    add_includedirs(<span class="string">&quot;/tmp&quot;</span>)</span><br><span class="line">    set_languages(<span class="string">&quot;c99&quot;</span>, <span class="string">&quot;c++11&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> is_mode(<span class="string">&quot;release&quot;</span>) <span class="keyword">then</span></span><br><span class="line">        set_optimize(<span class="string">&quot;fastest&quot;</span>)</span><br><span class="line">        set_strip(<span class="string">&quot;all&quot;</span>)</span><br><span class="line">        set_symbols(<span class="string">&quot;hidden&quot;</span>)</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line"><span class="comment"># set_optimize(&quot;fastest&quot;) 就是添加 -O3 的编译优化开关</span></span><br><span class="line"><span class="comment"># set_strip(&quot;all&quot;) 和 set_symbols(&quot;hidden&quot;) 用于去掉调# # 试符号数据，使得程序更小。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>添加源文件</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add_files(<span class="string">&quot;src/test_*.c&quot;</span>, <span class="string">&quot;src/**.cpp&quot;</span>) <span class="comment"># ** 递归匹配多级目录下的源文件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>过滤源文件</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/**.cpp|test/*.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>其中分隔符 <code>|</code> 之后的都是需要排除的文件，这些文件也同样支持匹配模式，并且可以同时添加多个过滤模式，只要中间用 <code>|</code> 分割就行了.</p>
+<h1 id="C-x2F-C-依赖包的使用"><a href="#C-x2F-C-依赖包的使用" class="headerlink" title="C&#x2F;C++ 依赖包的使用"></a>C&#x2F;C++ 依赖包的使用</h1><h2 id="依赖库的介绍"><a href="#依赖库的介绍" class="headerlink" title="依赖库的介绍"></a>依赖库的介绍</h2><p>使用 <code>zlib</code> 库 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake create -l c crc32 <span class="comment"># 构建一个基于C语言的工程</span></span><br></pre></td></tr></table></figure>
+
+<p>然后将其中的 <code>main.c</code> 修改为如下的内容</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;zlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;crc32: %x!\n&quot;</span>, crc32(<span class="number">0</span>, argv[<span class="number">1</span>], <span class="built_in">strlen</span>(argv[<span class="number">1</span>])));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后修改配置文件为如下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;crc32&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.c&quot;</span>)</span><br><span class="line">    add_links(<span class="string">&quot;z&quot;</span>)</span><br><span class="line">    add_linkdirs(<span class="string">&quot;/usr/lib/x86_64-linux-gnu&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果库的目录不是那里，可以使用下面的方式来找库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake l find_packages zlib</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;crc32&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.c&quot;</span>)</span><br><span class="line">    add_links(<span class="string">&quot;z&quot;</span>)</span><br><span class="line">    on_load(<span class="keyword">function</span> (target)</span><br><span class="line">        target:add(find_packages(<span class="string">&quot;zlib&quot;</span>))</span><br><span class="line">    end)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmake </span><br><span class="line">xmake run crc32 somedata</span><br></pre></td></tr></table></figure>
+
+<h2 id="远程库的下载"><a href="#远程库的下载" class="headerlink" title="远程库的下载"></a>远程库的下载</h2><p><code>xmake</code>提供了依赖包的自动远程下载以及安装集成功能，它不仅支持 <code>conan</code>、<code>vcpkg</code>、<code>homebrew</code> 等第三方包管理仓库，还支持自建的分布式私有包管理仓库，并且 <code>xmake</code> 也提供了官方的 <a target="_blank" rel="noopener" href="https://github.com/xmake-io/xmake-repo">C&#x2F;C++ 包仓库</a>。</p>
+<p><img src="https://doc.shiyanlou.com/courses/2764/27526/308009fc6eea85743abe41e97cc60d73-0" alt="7"> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">add_requires(<span class="string">&quot;zlib&quot;</span>, &#123;system = <span class="literal">false</span>&#125;)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;crc32&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.c&quot;</span>)</span><br><span class="line">    add_packages(<span class="string">&quot;zlib&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>add_requires()</code> 接口指定当前项目需要哪些包，配置这个编译时候会触发一次依赖包的安装</p>
+<p><code>add_packages()</code> 用来配置对特定 target 目标集成指定的依赖包，这两者需要配合使用，缺一不可。</p>
+<p><code>&#123;system = false&#125;</code> 强制触发远程下载 </p>
+<p><strong>卸载和重装依赖包</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmake require --uninstall zlib <span class="comment"># 卸载之前安的包</span></span><br><span class="line">xmake f -c -y <span class="comment"># 重装依赖包</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>语义版本设置</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">add_requires(<span class="string">&quot;zlib&quot;</span>, &#123;system = <span class="literal">false</span>&#125;)</span><br><span class="line">add_requires(<span class="string">&quot;tbox 1.6.*&quot;</span>, <span class="string">&quot;pcre2 &gt;10.0&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;crc32&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.c&quot;</span>)</span><br><span class="line">    add_packages(<span class="string">&quot;zlib&quot;</span>, <span class="string">&quot;tbox&quot;</span>, <span class="string">&quot;pcre2&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>集成 git 仓库的 <code>master/dev</code> 分支依赖包 .只需要把版本号换成对应的分支名就行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">add_requires(<span class="string">&quot;tbox master&quot;</span>)</span><br><span class="line">add_requires(<span class="string">&quot;tbox dev&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看依赖库的信息</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake require --info zlib</span><br></pre></td></tr></table></figure>
+
+<h2 id="Conan-仓库依赖包的集成-需要配置"><a href="#Conan-仓库依赖包的集成-需要配置" class="headerlink" title="Conan 仓库依赖包的集成(需要配置)"></a>Conan 仓库依赖包的集成(需要配置)</h2><p><code>Conan</code> 是基于 <code>Python</code> 的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install --upgrade pip <span class="comment"># 安装 pip </span></span><br><span class="line">sudo pip install conan         <span class="comment"># 安装 conan</span></span><br></pre></td></tr></table></figure>
+
+<p><code>CONAN::</code> 作为 <code>conan</code> 包仓库的命名空间，让 <code>xmake</code> 将其作为 <code>conan</code> 依赖包来处理后续的探测、下载和安装逻辑。<code>xmake</code> 内部会自动调用 <code>conan</code> 去安装指定的 <code>zlib</code> 包，并且集成进来，因此这里的 <code>zlib/1.2.11@conan/stable</code> 包描述格式也是完全基于 <code>conan</code> 自身的规范，大家可以直接到 <a target="_blank" rel="noopener" href="https://docs.conan.io/en/latest/using_packages/conanfile_txt.html#requires">conan 官方文档</a> 查看如何设置</p>
+<p> <code>&#123;alias = &quot;zlib&quot;&#125;</code> 部分是 <code>add_requires</code> 接口对于每个包的扩展配置，这里 <code>alias</code> 用来设置包的别名，方便之后每个 <code>target</code> 中更加精简的去集成，例如：<code>add_packages(&quot;zlib&quot;)</code>，而不是每次都是用全名。</p>
+<h1 id="配置语法"><a href="#配置语法" class="headerlink" title="配置语法"></a>配置语法</h1><h2 id="配置语法简介"><a href="#配置语法简介" class="headerlink" title="配置语法简介"></a><strong>配置语法简介</strong></h2><p><strong>配置分离</strong> </p>
+<p><code>xmake.lua</code> 采用二八原则实现了描述域、脚本域两层分离式配置。</p>
+<p>二八原则呢，简单来说，大部分项目的配置，80% 的情况下，都是些基础的常规配置，比如：<code>add_cxflags</code>、<code>add_links</code> 等，只有剩下不到 20% 的地方才需要额外编写一些复杂的逻辑脚本来满足一些特殊的配置需求。</p>
+<p>而这剩余的 20% 配置通常比较复杂，如果直接充斥在整个 xmake.lua 里面，会把整个项目的配置弄的很混乱，不具有良好的可读性。</p>
+<p>因此，xmake 通过描述域、脚本域两种不同的配置方式，来隔离 80% 的简单配置以及 20% 的复杂配置，使得整个 xmake.lua 看起来非常的清晰直观，可读性和可维护性都达到最佳。</p>
+<p><img src="https://toodles.oss-cn-hangzhou.aliyuncs.com/img/image-20230417130704848.png" alt="image-20230417130704848"> </p>
+<ul>
+<li>描述域：使用 <code>set_xx</code>、<code>add_xxx</code> 等配置接口进行的配置区域。</li>
+<li>脚本域：使用 <code>on_xx</code>、<code>after_xxx</code> 和 <code>before_xxx</code> 等配置接口的内部区域。</li>
+</ul>
+<h2 id="描述域配置"><a href="#描述域配置" class="headerlink" title="描述域配置"></a>描述域配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.c&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;DEBUG&quot;</span>)</span><br><span class="line">    add_syslinks(<span class="string">&quot;pthread&quot;</span>)m</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> hello</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> hello</span><br><span class="line">vim main.c</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello %s\n&quot;</span>, WORD);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim xmake.lua</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.c&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;WORD=\&quot;foo\&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake run</span><br></pre></td></tr></table></figure>
+
+<h2 id="脚本域配置"><a href="#脚本域配置" class="headerlink" title="脚本域配置"></a>脚本域配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.c&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;WORD=\&quot;foo\&quot;&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    after_build(<span class="keyword">function</span> (target)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;my path: %s&quot;</span>, target:targetfile())</span><br><span class="line">    end)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.c&quot;</span>)</span><br><span class="line">    on_load(<span class="function"><span class="keyword">function</span> <span class="params">(target)</span></span></span><br><span class="line">        target:add(<span class="string">&quot;defines&quot;</span>, <span class="string">&quot;WORD=\&quot;foo\&quot;&quot;</span>)</span><br><span class="line">    <span class="keyword">end</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>分离配置脚本域</strong> </p>
+<blockquote>
+<p>在 <code>modules</code> 中创建 <code>load.lua</code> ，将下面的内容写入。</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span><span class="params">(target)</span></span></span><br><span class="line">    target:add(<span class="string">&quot;defines&quot;</span>, <span class="string">&quot;WORD=\&quot;foo\&quot;&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.c&quot;</span>)</span><br><span class="line">    on_load(<span class="string">&quot;modules.load&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="多目标程序配置"><a href="#多目标程序配置" class="headerlink" title="多目标程序配置"></a>多目标程序配置</h2><blockquote>
+<p>  将上面的配置文件换为下面的文件，会生成两个可执行程序。</p>
+<p>  <code>xmake run</code> 会把两个程序都执行一遍</p>
+<p>  <code>xmake run test1</code> 会执行 <code>test1</code> 程序</p>
+<p>  <code>xmake run test2</code> 会执行 <code>test2</code> 程序</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;test1&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.c&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;WORD=\&quot;TEST1\&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test2&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.c&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;WORD=\&quot;TEST2\&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>全局配置和子配置</strong> </p>
+<p>我们可以把每个 target 中都会使用到的通用配置抽离出来，放在最上面的全局配置域中设置，这样就会对所有 target 都生效了。 </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">add_defines(<span class="string">&quot;ROOT&quot;</span>)</span><br><span class="line">set_optimize(<span class="string">&quot;fastest&quot;</span>)</span><br><span class="line">set_languages(<span class="string">&quot;c99&quot;</span>)</span><br><span class="line">add_includedirs(<span class="string">&quot;/tmp&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test1&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.c&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;WORD=\&quot;TEST1\&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test2&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.c&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;WORD=\&quot;TEST2\&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="目标依赖"><a href="#目标依赖" class="headerlink" title="目标依赖"></a>目标依赖</h1><h2 id="多目标程序的依赖编译"><a href="#多目标程序的依赖编译" class="headerlink" title="多目标程序的依赖编译"></a>多目标程序的依赖编译</h2><p>在默认情况下，xmake 在编译多个目标程序时，会通过多任务并行编译来提升项目的整体编译效率，不过每个 target 目标程序实际的编译顺序是未定义的。</p>
+<p>然而有时候，某些项目工程中的多个目标程序之间是有依赖关系的，如果不控制编译顺序，那么有可能会错误地优先编译一些需要滞后的程序，就会导致编译出错。</p>
+<p>这种情况下通过 <code>add_deps()</code> 配置接口去控制指定 target 的编译依赖顺序，对一些依赖静态库、动态库的可执行程序非常有用。</p>
+<p><strong>链接和编译的依赖控制</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake create deps_test <span class="comment"># 创建一个 deps_test 的空工程 </span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  修改配置文件为下面的内容 。</p>
+<p>  使用 <code>add_deps</code> 将三个 target 目标程序的依赖顺序调整为：<code>test1</code> 依赖 <code>test2</code>， <code>test2</code> 依赖 <code>test3</code> 。</p>
+<p>  <code>test3</code> 会优先编译，然后是编译 <code>test2</code>，最后才编译 <code>test1</code>。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;test1&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    add_deps(<span class="string">&quot;test2&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test2&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    add_deps(<span class="string">&quot;test3&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test3&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>也就是即使设置 <code>add_deps</code>，xmake 默认也仅仅控制链接的依赖顺序，不控制源码编译的依赖顺序。 </p>
+<p>如果程序确实还是需要每个 target 的源码都要严格按照 <code>add_deps</code> 指定的依赖顺序去控制编译，那么我们只需要设置下编译策略，禁用跨目标并行编译即可，例如下面的配置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">set_policy(<span class="string">&quot;build.across_targets_in_parallel&quot;</span>, <span class="literal">false</span>)</span><br><span class="line"><span class="comment"># 全局设置禁用 build.across_targets_in_parallel 的策略,就可以完全串行化 target 间的源码编译顺序，不再跨目标并行编译源码。</span></span><br><span class="line">target(<span class="string">&quot;test1&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    add_deps(<span class="string">&quot;test2&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test2&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    add_deps(<span class="string">&quot;test3&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test3&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://toodles.oss-cn-hangzhou.aliyuncs.com/img/image-20230417233751473.png" alt="image-20230417233751473"> </p>
+<p>这次我们不仅链接顺序，甚至连源码也都严格按照 <code>test3</code>，<code>test2</code>，<code>test1</code> 的顺序来编译了，<code>test1</code> 的源码必须要等待 <code>test2</code> 实际完成链接后才会去编译。</p>
+<p><strong>静态库的依赖编译和运行</strong> </p>
+<p><img src="https://doc.shiyanlou.com/courses/2764/27526/1c4b3662abde868d0f949f6b9ef5c88b-1" alt="3"> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake create -t static sta_foo <span class="comment"># 创建一个静态工程的空项目 </span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  下面是配置文件</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;foo&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;static&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/foo.cpp&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;sta_foo&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_deps(<span class="string">&quot;foo&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/main.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>其中， <code>foo</code> 是静态库的目标程序, <code>sta_foo</code> 是可执行目标程序，他通过 <code>add_deps(&quot;foo&quot;)</code> 进行依赖关联，使得 <code>sta_foo</code> 可以自动集成 <code>foo</code> 静态库，而不再需要 额外添加 <code>add_linkdirs</code>、<code>add_links</code> 等配置信息。</p>
+<p><strong>依赖配置的可见性设置</strong> </p>
+<p><code>add_deps</code> 除了能够自动继承静态库依赖的链接信息，还可以继承一些其它的配置信息，比如：<code>add_includedirs</code>、<code>add_defines</code> 等大部分配置都是可以被继承的。</p>
+<p>不过只有这些配置被设置了 <code>public</code>、<code>interface</code> 等对外可见性设置，才能够支持对其它 target 导出配置被继承。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;foo&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;static&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/foo.cpp&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;TEST&quot;</span>, &#123;public = <span class="literal">true</span>&#125;) <span class="comment"># &#123;public = true&#125; 将 -DTEST 的宏定义设置公开给其它依赖的子 target 继承，并且 foo 自身也会被定义。</span></span><br><span class="line">    add_includedirs(<span class="string">&quot;src&quot;</span>, &#123;interfac = <span class="literal">true</span>&#125;) <span class="comment"># 会把 src 作为头文件搜索目录，以接口的方式仅仅开放给其它 target 继承，而 foo 自身不会去设置它。</span></span><br><span class="line">    </span><br><span class="line">target(<span class="string">&quot;sta_foo&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_deps(<span class="string">&quot;foo&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/main.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>xmake</code> 提供的三种可见性，默认是私有的，不对外可见。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>private</td>
+<td>默认设置，作为当前 target 的私有配置，不会被依赖的其它 target 所继承</td>
+</tr>
+<tr>
+<td>public</td>
+<td>公有配置，当前 target 依赖的子 target 都会被设置</td>
+</tr>
+<tr>
+<td>interface</td>
+<td>接口设置，仅被依赖的子 target 所继承设置，当前 target 不参与</td>
+</tr>
+</tbody></table>
+<p><strong>级联依赖继承</strong> </p>
+<p>设计再复杂一些, <code>sta_foo</code> 依赖 <code>foo</code> 静态库，而 <code>foo</code> 依赖 <code>bar</code> 静态库，并且我们把额外的 <code>public</code> 导出配置放置到 <code>bar</code> 目标程序中，比如下面这样。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;bar&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;static&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/foo.cpp&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;TEST&quot;</span>, &#123;public = <span class="literal">true</span>&#125;)</span><br><span class="line">    add_includedirs(<span class="string">&quot;src&quot;</span>, &#123;interface = <span class="literal">true</span>&#125;)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;foo&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;static&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/foo.cpp&quot;</span>)</span><br><span class="line">    add_deps(<span class="string">&quot;bar&quot;</span>)</span><br><span class="line">    </span><br><span class="line">target(<span class="string">&quot;sta_foo&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_deps(<span class="string">&quot;foo&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/main.cpp&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="动态库的依赖编译"><a href="#动态库的依赖编译" class="headerlink" title="动态库的依赖编译"></a>动态库的依赖编译</h2><p>只需要把之前的 xmake.lua 里面的 foo 目标类型改成 shared，就能编译生成动态库，并且自动关联上可执行程序。我们改成下面的配置。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;foo&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;shared&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/foo.cpp&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;TEST&quot;</span>, &#123;public = <span class="literal">true</span>&#125;)</span><br><span class="line">    add_includedirs(<span class="string">&quot;src&quot;</span>, &#123;interface = <span class="literal">true</span>&#125;)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;sta_foo&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_deps(<span class="string">&quot;foo&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/main.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用 Phony 目标组合多个依赖程序</strong> </p>
+<p>除了 <code>binary</code>、<code>static</code> 和 <code>shared</code> 之外，还有一个特殊的目标类型 <code>phony</code>，它用于设置给定 target 作为一个空的目标对象，并不会参与实际的源码编译。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;foo&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;bar&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;baz&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;group&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;phony&quot;</span>)</span><br><span class="line">    add_deps(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake build group <span class="comment">#  执行这个命令时, 会生成 bar 和  foo</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h1><p>由于 <code>xmake</code> 是基于 <code>lua</code> 脚本的，所以不管是在描述域还是脚本域中的配置，我们都可以通过基础的 <code>lua</code> 条件判断语法去控制配置逻辑。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 语法如下</span></span><br><span class="line"><span class="keyword">if</span> expr <span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line"><span class="keyword">elseif</span> <span class="keyword">not</span> expr <span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>可以使用 <code>not</code> <code>and</code> 和 <code>or</code> 三个逻辑关键词组成各种复杂的逻辑条件。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> a &gt; b <span class="keyword">and</span> <span class="keyword">not</span> c <span class="keyword">or</span> d <span class="keyword">then</span></span><br><span class="line">    <span class="comment">-- ...</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>判断当前目标平台</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xmake create condition <span class="comment"># 创建一个空工程</span></span><br><span class="line"><span class="built_in">cd</span> condition</span><br><span class="line"><span class="built_in">mkdir</span> src/linux</span><br><span class="line"><span class="built_in">touch</span> src/linux/stub.cpp</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  修改配置</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> is_plat(<span class="string">&quot;linux&quot;</span>) <span class="keyword">then</span>  <span class="comment">-- 判断当前的平台是不是 linux</span></span><br><span class="line">        add_defines(<span class="string">&quot;LINUX&quot;</span>)</span><br><span class="line">        add_files(<span class="string">&quot;src/linux/*.cpp&quot;</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> is_plat(<span class="string">&quot;linux&quot;</span>, <span class="string">&quot;android&quot;</span>) <span class="keyword">then</span> <span class="comment">-- 判断多个平台</span></span><br><span class="line">        add_defines(<span class="string">&quot;LINUX&quot;</span>)</span><br><span class="line">        add_files(<span class="string">&quot;src/linux/*.cpp&quot;</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>判断编译指令架构</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> src/x86_64  <span class="comment"># 构建一个目录, 用于测试判断指定指令集</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> src/x86_64/stub.S <span class="comment"># 创建一个文件</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  修改配置文件如下</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> is_plat(<span class="string">&quot;linux&quot;</span>) <span class="keyword">then</span></span><br><span class="line">        add_defines(<span class="string">&quot;LINUX&quot;</span>)</span><br><span class="line">        add_files(<span class="string">&quot;src/linux/*.cpp&quot;</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">if</span> is_arch(<span class="string">&quot;x86_64&quot;</span>) <span class="keyword">then</span></span><br><span class="line">        add_files(<span class="string">&quot;src/x86_64/*.S&quot;</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--    编译指令架构指的是生成的目标程序实际执行的指令架构，例如：x86_86、i386、armv7 等指令集。</span></span><br><span class="line"><span class="comment">--    在 Windows 系统上通常是 x64、x86 指令集，而在 Linux/macOS 系统上通常是 x86_64、i386 指令集，另外在一些嵌入式设备、移动端操作系统上通常是 armv7、arm64、mips 等指令架构。 </span></span><br></pre></td></tr></table></figure>
+
+<p><strong>判断宿主平台架构</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmake l os.host <span class="comment"># 获取宿主平台</span></span><br><span class="line">xmake l os.arch <span class="comment"># 获取宿主平台架构</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  使用交叉编译来完成编译</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f -p cross -c <span class="comment"># 切换到 cross 交叉编译平台</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake -r <span class="comment"># 重新编译</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  判断宿主平台的配置</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> is_host(<span class="string">&quot;linux&quot;</span>) <span class="keyword">then</span></span><br><span class="line">        add_defines(<span class="string">&quot;LINUX&quot;</span>)</span><br><span class="line">        add_files(<span class="string">&quot;src/linux/*.cpp&quot;</span>)</span><br><span class="line">    end</span><br><span class="line">    <span class="keyword">if</span> os.arch() == <span class="string">&quot;x86_64&quot;</span> <span class="keyword">then</span></span><br><span class="line">        add_files(<span class="string">&quot;src/x86_64/*.S&quot;</span>)</span><br><span class="line">    end</span><br></pre></td></tr></table></figure>
+
+<p><strong>判断编译模式</strong> </p>
+<p>我们将尝试完全使用 <code>is_mode()</code> 来自定义判断配置 <code>debug</code> 和 <code>release</code> 编译模式下的一些特定编译选项，实现和内置的<code>add_rules(&quot;mode.release&quot;, &quot;mode.debug&quot;)</code> 编译规则一样的控制效果。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> is_mode(<span class="string">&quot;release&quot;</span>) <span class="keyword">then</span></span><br><span class="line">    set_symbols(<span class="string">&quot;hidden&quot;</span>) <span class="comment">-- 去除了调试符号信息</span></span><br><span class="line">    set_optimize(<span class="string">&quot;fastest&quot;</span>) <span class="comment">-- 开始优化</span></span><br><span class="line">    set_strip(<span class="string">&quot;all&quot;</span>)</span><br><span class="line"><span class="keyword">elseif</span> is_mode(<span class="string">&quot;debug&quot;</span>) <span class="keyword">then</span></span><br><span class="line">    set_symbols(<span class="string">&quot;debug&quot;</span>) </span><br><span class="line">    set_optimize(<span class="string">&quot;none&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  在 <code>release</code> 模式下测试</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f -m release <span class="comment"># 切换到 release 模式</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake -rv <span class="comment"># 编译,显示详细信息</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  在<code>debug</code> 模式下测试 </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f -m debug <span class="comment"># 切换到 debug 模式 </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake -rv        <span class="comment"># 编译, 显示详细信息</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>判断自定义配置选项</strong> </p>
+<p>为了更加灵活的扩展性，<code>xmake</code> 提供了一种可以让大家自由扩展配置选项的方式，使得在 <code>xmake.lua</code> 中更加定制化的判断配置项。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">option(<span class="string">&quot;myopt&quot;</span>)</span><br><span class="line">    set_showmenu(<span class="literal">true</span>)</span><br><span class="line">    set_description(<span class="string">&quot;The test config option&quot;</span>)</span><br><span class="line">option_end()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f --myopt=hello</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f --<span class="built_in">help</span> | grep myopt <span class="comment"># 查看是否有这个选项</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  再次修改配置文件，如果 <code>myplot</code> 配置是 <code>hello</code> ，添加宏编译 </p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> is_mode(<span class="string">&quot;release&quot;</span>) <span class="keyword">then</span></span><br><span class="line">    set_symbols(<span class="string">&quot;hidden&quot;</span>) <span class="comment">-- 去除了调试符号信息</span></span><br><span class="line">    set_optimize(<span class="string">&quot;fastest&quot;</span>) <span class="comment">-- 开始优化</span></span><br><span class="line">    set_strip(<span class="string">&quot;all&quot;</span>)</span><br><span class="line"><span class="keyword">elseif</span> is_mode(<span class="string">&quot;debug&quot;</span>) <span class="keyword">then</span></span><br><span class="line">    set_symbols(<span class="string">&quot;debug&quot;</span>) </span><br><span class="line">    set_optimize(<span class="string">&quot;none&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">option(<span class="string">&quot;myopt&quot;</span>)</span><br><span class="line">    set_showmenu(<span class="literal">true</span>)</span><br><span class="line">    set_description(<span class="string">&quot;The test config option&quot;</span>)</span><br><span class="line">option_end()</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> is_config(<span class="string">&quot;myopt&quot;</span>, <span class="string">&quot;hello&quot;</span>) <span class="keyword">then</span></span><br><span class="line">        add_defines(<span class="string">&quot;HELLO&quot;</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake f --myopt=hello <span class="comment"># 配置</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake -rv <span class="comment"># 编译</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="内置变量"><a href="#内置变量" class="headerlink" title="内置变量"></a>内置变量</h1><h2 id="内置变量的介绍"><a href="#内置变量的介绍" class="headerlink" title="内置变量的介绍"></a>内置变量的介绍</h2><p><code>xmake</code> 提供了 <code>$(varname)</code> 的语法，来支持在配置字符串中直接传递内置变量</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">add_cxflags(<span class="string">&quot;-I$(projectdir)&quot;</span>) </span><br><span class="line"><span class="comment">-- 它会在实际编译时，将内置的 projectdir 变量转换为实际的项目根目录。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>配置传递项目根目录</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake create hello <span class="comment">#  创建一个用于演示的空工程</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake l <span class="built_in">print</span> <span class="string">&#x27;$(projectdir)&#x27;</span> <span class="comment"># 输出内置环境变量</span></span><br></pre></td></tr></table></figure>
+
+<p>这个变量会随着不同的项目自动适配对应的项目路径，因此我们可以在描述域配置中直接嵌入这个变量来使用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> inc  <span class="comment"># 创建一个头文件的目录</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> inc/stub.h <span class="comment"># 创建一个头文件</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  将配置文件修改为如下</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    add_includedirs(<span class="string">&quot;$(projectdir)/inc&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake -rv</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>$(buildir)</code>：实际构建输出目录。</li>
+<li><code>$(tmpdir)</code>：临时目录。</li>
+<li><code>$(curdir)</code>：当前运行目录。</li>
+<li><code>$(scriptdir)</code>：当前 <code>xmake.lua</code> 配置脚本所在目录。</li>
+<li><code>$(programdir)</code>：<code>xmake</code> 安装程序的 <code>lua</code> 脚本根目录。</li>
+</ul>
+<p><strong>获取环境变量</strong> </p>
+<p>可以通过 <code>$(env varname)</code> 内置变量，在字符串中快速获取指定环境变量。 </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    add_includedirs(<span class="string">&quot;$(env HOME)&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>xmake</code> 也提供了接口可以直接快速查看。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake l os.getenvs <span class="comment"># 打印所有的环境变量。</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake l os.getenv HOME <span class="comment"># 打印指定的环境变量</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>执行获取 shell 输出内容</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum update <span class="comment"># 更新yum 源 </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y libsqlite3-dev <span class="comment"># 安装库 </span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  将下面的内容写入到配置文件中去</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> is_plat(<span class="string">&quot;linux&quot;</span>) <span class="keyword">then</span></span><br><span class="line">        add_ldflags(<span class="string">&quot;$(shell pkg-config --libs sqlite3)&quot;</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake -rv <span class="comment"># 编译并且展示详细信息</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="读取配置选项"><a href="#读取配置选项" class="headerlink" title="读取配置选项"></a>读取配置选项</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    set_targetdir(<span class="string">&quot;$(projectdir)/bin/$(plat)/$(arch)/$(mode)&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  上面的配置文件修改了目标程序的输出路径，通过使用内置变量。</p>
+</blockquote>
+<p><strong>读取自定义选项配置</strong> </p>
+<blockquote>
+<p>  下面是配置文件</p>
+</blockquote>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">option(<span class="string">&quot;myopt&quot;</span>)</span><br><span class="line">    set_showmenu(<span class="literal">true</span>)</span><br><span class="line">    set_description(<span class="string">&quot;The test config option&quot;</span>)</span><br><span class="line">option_end()</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    add_defines(<span class="string">&quot;$(myopt)&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmake f --myopt=TEST1 <span class="comment"># 添加宏定义</span></span><br><span class="line">xmake -rv <span class="comment"># 编译</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmake f --myopt=TEST2 <span class="comment"># 更改宏定义</span></span><br><span class="line">xmake -rv <span class="comment"># 编译</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="C-x2F-C-子工程和目录结构"><a href="#C-x2F-C-子工程和目录结构" class="headerlink" title="C &#x2F; C++ 子工程和目录结构"></a>C &#x2F; C++ 子工程和目录结构</h1><h2 id="使用-includes-引入目标和文件"><a href="#使用-includes-引入目标和文件" class="headerlink" title="使用 includes 引入目标和文件"></a>使用 includes 引入目标和文件</h2><p>对于一些大型项目，其源码的组织结构相对比较复杂，层级也比较深，需要参与编译生成的 <code>target</code> 目标也可能有十几甚至上百个，这个时候如果还是都在单一的根 <code>xmake.lua</code> 文件中维护，就有点吃不消了，会显得非常的臃肿并且不可维护。</p>
+<p>这个时候，我们需要通过在每个子工程模块里面，单独创建 <code>xmake.lua</code> 来维护它们，然后使用 <code>xmake</code> 提供的 <code>includes</code> 接口，将它们按层级关系包含进来，最终变成一个树状结构。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake create includes_test <span class="comment"># 创建一个空工程 </span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> tests  </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch src/xmake.lua</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> src/* tests</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>  通过上面的操作。这里有两个模块，一个是 <code>src</code> 目录下的主程序，另一个是 <code>test</code> 目录下的测试程序，他们分别由自己的 <code>xmake.lua</code> 来维护构建，然后通过根目录的 <code>xmake.lua</code> 将这两个模块关联起来，构成一个项目树。</p>
+</blockquote>
+<p><img src="https://doc.shiyanlou.com/courses/2764/27526/ca435d943a281fae38078d6065bc2dd6-0" alt="1"> </p>
+<p>接下来，编写 <code>xmake.lua</code> 的配置</p>
+<p>根目录：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">includes(<span class="string">&quot;src&quot;</span>, <span class="string">&quot;tests&quot;</span>) <span class="comment">-- 引入 src 和 tests 目录下的子 xmake.lua 配置</span></span><br></pre></td></tr></table></figure>
+
+<p><code>src/xmake.lua</code> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>test/xmake.lua</code> </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">target(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="模式匹配实现批量-includes"><a href="#模式匹配实现批量-includes" class="headerlink" title="模式匹配实现批量 includes"></a>模式匹配实现批量 includes</h2><p>默认情况下通过 <code>includes(&quot;tests&quot;)</code> 引用子目录，就可以直接导入子目录下 xmake.lua 配置，如果要导入其它文件名的配置文件，可以指定文件全名到 includes，例如 <code>includes(&quot;tests/xmake.lua&quot;)</code>。</p>
+<p>基于此，再加上 <code>includes</code> 的模式匹配支持，我们就可以实现批量导入当前工程的所有子 <code>xmake.lua</code>，而不再需要挨个进入子目录手动去配置引入。</p>
+<blockquote>
+<p>  修改根目录下的 <code>xmake.lua</code> 的内容</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">includes(<span class="string">&quot;*/xmake.lua&quot;</span>)</span><br><span class="line"><span class="comment">#  **/xmake.lua  递归模式的匹配</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="根-xmake-lua-配置"><a href="#根-xmake-lua-配置" class="headerlink" title="根 xmake.lua 配置"></a>根 <code>xmake.lua</code> 配置</h2><p>现在，我们整体的项目结构已经通过 includes 方式将所有的子工程全部关联到了一起，使得每个 target 都被放置在单独的子工程目录中去维护。</p>
+<p>但是，如果我们有一些通用的配置，需要得这个项目的所有子 target 目标都生效，那么，我们可以直接在根 xmake.lua 的根域去配置它们，子目录下的 target 同样可以被继承到。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">set_project(<span class="string">&quot;hello&quot;</span>)</span><br><span class="line">set_version(<span class="string">&quot;1.0.1&quot;</span>)</span><br><span class="line"></span><br><span class="line">add_rules(<span class="string">&quot;mode.release&quot;</span>, <span class="string">&quot;mode.debug&quot;</span>)</span><br><span class="line"></span><br><span class="line">set_warnings(<span class="string">&quot;all&quot;</span>, <span class="string">&quot;error&quot;</span>)</span><br><span class="line">set_languages(<span class="string">&quot;c++11&quot;</span>)</span><br><span class="line">add_defines(<span class="string">&quot;ROOT&quot;</span>)</span><br><span class="line"></span><br><span class="line">includes(<span class="string">&quot;*/xmake.lua&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="子-xmake-lua-配置"><a href="#子-xmake-lua-配置" class="headerlink" title="子 xmake.lua 配置"></a>子 <code>xmake.lua</code> 配置</h2><p><img src="https://doc.shiyanlou.com/courses/2764/27526/0371ee1ae8a578b86f608a0591bb9a43-0" alt="4"> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> src/foo </span><br><span class="line"><span class="built_in">mkdir</span> src/bar</span><br><span class="line"><span class="built_in">cp</span> src/main.cpp src/bar</span><br><span class="line"><span class="built_in">cp</span> src/main.cpp src/foo</span><br><span class="line"><span class="built_in">rm</span> src/main.cpp</span><br><span class="line"><span class="built_in">touch</span> src/foo/xmake.lua</span><br><span class="line"><span class="built_in">touch</span> src/bar/xmake.lua</span><br></pre></td></tr></table></figure>
+
+<p> <code>src/xmake.lua</code> </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">add_defines(<span class="string">&quot;HELLO&quot;</span>)</span><br><span class="line">includes(<span class="string">&quot;*/xmake.lua&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>src/foo/xmake.lua</code> </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add_defines(<span class="string">&quot;FOO&quot;</span>)</span><br><span class="line">target(<span class="string">&quot;foo&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p> <code>src/bar/xmake.lua</code>  </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add_defines(<span class="string">&quot;BAR&quot;</span>)</span><br><span class="line">target(<span class="string">&quot;bar&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p> <code>tests/xmake.lua</code>  </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add_defines(<span class="string">&quot;TEST&quot;</span>)</span><br><span class="line">target(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://doc.shiyanlou.com/courses/2764/27526/90300f801111f390a97b279abe82afb4-0" alt="5"> </p>
+<h2 id="跨-xmake-lua-间目标依赖"><a href="#跨-xmake-lua-间目标依赖" class="headerlink" title="跨 xmake.lua 间目标依赖"></a>跨 <code>xmake.lua</code> 间目标依赖</h2><p>只要是通过 includes 引用的所有 xmake.lua，其中的 target 定义即使在不同的子 xmake.lua 中，xmake 也会将它们全部加载进来，因此这些 target 之间的依赖关系还是可以正常配置，哪怕是跨 xmake.lua 也不会有任何影响。</p>
+<p>比如，我们让 test 程序去依赖另外两个子程序 foo 和 bar，那么我们可以使用之前的依赖配置方式去配置关联依赖。</p>
+<p>只需要修改 <code>tests/xmake.lua</code> 里面的配置内容，添加上这两个依赖目标即可。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">add_defines(<span class="string">&quot;TEST&quot;</span>)</span><br><span class="line">target(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;*.cpp&quot;</span>)</span><br><span class="line">    add_deps(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果依赖已经生效，那么在链接 test 程序之前，foo 和 bar 会优先编译和完成链接。</p>
+<h1 id="C-x2F-C-预编译头文件配置"><a href="#C-x2F-C-预编译头文件配置" class="headerlink" title="C &#x2F; C++ 预编译头文件配置"></a>C &#x2F; C++ 预编译头文件配置</h1><h2 id="预编译头文件介绍"><a href="#预编译头文件介绍" class="headerlink" title="预编译头文件介绍"></a>预编译头文件介绍</h2><p>在编译器编译每个 C++ 代码的时候，都需要额外处理一遍所有被引入的头文件，而 C++ 头文件的引入就会带来大量的类型定义，C++ 模板类定义等，都会导致源文件的编译速度非常的慢。</p>
+<p>如果我们使用过 boost、std 等 C++ 库，就应该知道，这些库大部分类定义都在头文件中，而且大量使用了 C++ 模板特性，引入一个头文件就会使得整体编译慢很多，尤其是臃肿的 boost 库。</p>
+<p>因此，为了优化编译速度，其实我们不需要编译每个源文件都去重复预处理一遍里面的头文件，我们可以把大部分项目常用的头文件放置在一个统一的头文件中，比如：stdafx.h （如果使用 vs 开发过 C++ 程序，应该经常能看到这个文件），然后让编译器先预先编译掉这个头文件，然后其它所有代码使用的时候，就不再需要额外引入编译了，在链接阶段直接复用就行了。</p>
+<p>这样就将之前的 N 次编译，减少为仅仅一次头文件编译，极大地提升了编译效率，减少大量的头文件冗余编译，这就是整个预编译头文件的作用和处理过程。而且目前大部分 C&#x2F;C++ 主流编译器，例如：gcc、clang、msvc 等，都是完全支持通过预编译头文件来优化 C&#x2F;C++ 代码的编译速度。</p>
+<p>关于预编译头文件处理的大概机制可以参考下图。</p>
+<p><img src="https://doc.shiyanlou.com/courses/2764/27526/bfe9439264336bfe456c57080718a6de-0" alt="1"> </p>
+<p><strong>配置使用 C++ 预编译头文件</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake create pcxxheader <span class="comment"># 创建一个空工程 </span></span><br></pre></td></tr></table></figure>
+
+<p>创建并编辑 <code>src/stdafx.h</code> 头文件，引入一些常用的 C++ 头文件。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> HEADER_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> HEADER_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;exception&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>以创建一些引用了这个头文件的 C++ 源文件，比如创建并编辑 <code>src/test1.cpp</code> 文件，添加如下代码。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdafx.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>为了测试明显，多创建几个</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test2.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test3.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test4.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test5.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test6.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test7.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test8.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test9.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test10.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test11.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test12.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test13.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test14.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test15.cpp</span><br><span class="line"><span class="built_in">cp</span> src/test1.cpp src/test16.cpp</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time xmake -r -j1 <span class="comment"># 获取正常编译情况下的总耗时 </span></span><br></pre></td></tr></table></figure>
+
+<p>然后开启预编译设置。 <code>xmake.lua</code> </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;pcxxheader&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.cpp&quot;</span>)</span><br><span class="line">    set_pcxxheader(<span class="string">&quot;src/stdafx.h&quot;</span>) </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time xmake -r -j1 <span class="comment"># 重新执行</span></span><br></pre></td></tr></table></figure>
+
+<p>比较两次的时间差</p>
+<h2 id="不同编译器对预编译器的处理"><a href="#不同编译器对预编译器的处理" class="headerlink" title="不同编译器对预编译器的处理"></a>不同编译器对预编译器的处理</h2><p><strong>配置使用 C 预编译头文件</strong> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmake create -l c pcheader <span class="comment"># 创建一个空的 c 工程</span></span><br></pre></td></tr></table></figure>
+
+<p>创建并编辑 <code>src/stdafx.h</code> 文件，引入一些常用系统头文件。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> HEADER_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> HEADER_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>创建一些使用了这个 stdafx.h 头文件的 C 代码，比如 <code>src/test1.c</code>，</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;stdafx.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> src/test1.c src/test2.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test3.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test4.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test5.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test6.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test7.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test8.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test9.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test10.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test11.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test12.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test13.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test14.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test15.c</span><br><span class="line"><span class="built_in">cp</span> src/test1.c src/test16.c</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time xmake -r -j1 <span class="comment"># 查看不采用预编译的时间</span></span><br></pre></td></tr></table></figure>
+
+<p>设置预编译选项，<code>xmake.lua</code> 中 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add_rules(<span class="string">&quot;mode.debug&quot;</span>, <span class="string">&quot;mode.release&quot;</span>)</span><br><span class="line"></span><br><span class="line">target(<span class="string">&quot;pcheader&quot;</span>)</span><br><span class="line">    set_kind(<span class="string">&quot;binary&quot;</span>)</span><br><span class="line">    add_files(<span class="string">&quot;src/*.c&quot;</span>)</span><br><span class="line">    set_pcheader(<span class="string">&quot;src/stdafx.h&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="C-x2F-C-库接口和编译器特性检测"><a href="#C-x2F-C-库接口和编译器特性检测" class="headerlink" title="C &#x2F; C++ 库接口和编译器特性检测"></a>C &#x2F; C++ 库接口和编译器特性检测</h1><h2 id="跨平台介绍"><a href="#跨平台介绍" class="headerlink" title="跨平台介绍"></a>跨平台介绍</h2><h2 id="配置编译器特性检测"><a href="#配置编译器特性检测" class="headerlink" title="配置编译器特性检测"></a>配置编译器特性检测</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>ToodlesFate
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://blog.nzself.top/2023/04/18/xmake-%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/" title="xmake 的基础使用">http://blog.nzself.top/2023/04/18/xmake-的基础使用/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/xmake/" rel="tag"> <i class="fa fa-tag"></i> <i class="fa fa-tag"></i> xmake</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/15/git%E5%9F%BA%E7%A1%80/" rel="prev" title="git基础">
+                  <i class="fa fa-chevron-left"></i> git基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ToodlesFate</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">35k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">31 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/ToodlesFate" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+
+</html>
